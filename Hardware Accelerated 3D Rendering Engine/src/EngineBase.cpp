@@ -108,6 +108,9 @@ void EngineBase::EngineThread() {
 
 		while (m_atomicBoolKeepEngineThreadActive) {
 			while (m_atomicBoolKeepEngineThreadActive) {
+
+				//Clear the Backbuffer
+				m_ptrRenderer->ClearBackBuffer(DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 				
 				//Calculate the time for a frame 
 				float dt = frameTimer.Mark();

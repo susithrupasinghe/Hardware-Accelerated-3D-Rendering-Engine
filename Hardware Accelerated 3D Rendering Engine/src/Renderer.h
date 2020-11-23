@@ -24,6 +24,7 @@ public:
 	Renderer(const Renderer&) = delete;
 	Renderer operator=(const Renderer&) = delete;
 
+	void ClearBackBuffer(const DirectX::XMFLOAT4& color);
 	void SetProjectionMatrix(const DirectX::XMMATRIX& projectionMatrix);
 	const DirectX::XMMATRIX& GetProjectionMatrix() const;
 
@@ -43,6 +44,9 @@ public:
 
 	//Get a pointer to the ID3D11RenderTargetView interface that represent the back buffer of the swap chain
 	ID3D11RenderTargetView* GetBackbufferTargetView() const;
+
+	//Get a pointer to ID3D11DepthStencilView interface of the DepthStencilView object to the backbuffer
+	ID3D11DepthStencilView* GetDepthStencilView() const;
 
 #pragma endregion
 
@@ -66,6 +70,9 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
 	//Pointer to ID3D11RenderTargetView inteface of the RenderTargetView object to BackBuffer Texture. We can use this render target view to bind back buffer as our render target
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTargetViewBackBuffer;
+	//Pointer to ID3D11DepthStencilView interface of the DepthStencilView object to the backbuffer
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDepthStencilView;
+
 	//Projection Matrix if we are using a 3D view
 	DirectX::XMMATRIX m_xmmatrixProjectionMatrix = {};
 };

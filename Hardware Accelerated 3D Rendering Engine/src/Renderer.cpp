@@ -59,7 +59,7 @@ Renderer::Renderer(HWND hWnd) {
 	// If we set Width and Height to 0 API will automaticaly choose the width and height from hWnd we give this descriptor
 	swap_chain_desc.BufferDesc.Width = 0;
 	swap_chain_desc.BufferDesc.Height = 0;
-	swap_chain_desc.BufferDesc.Format = DXGI_FORMAT::DXGI_FORMAT_B8G8R8A8_UNORM;
+	swap_chain_desc.BufferDesc.Format = DXGI_FORMAT::DXGI_FORMAT_R8G8B8A8_UNORM;
 	//Set RefreshRate.Numerator and RefreshRate.Denominator to 0. Which basicly means api will choose default refresh rate
 	swap_chain_desc.BufferDesc.RefreshRate.Numerator = 0;
 	swap_chain_desc.BufferDesc.RefreshRate.Denominator = 0;
@@ -122,6 +122,45 @@ Renderer::Renderer(HWND hWnd) {
 	//Apperantly ID3D11Device::CreateRenderTargetView() function doesn't require D3D11_RENDER_TARGET_VIEW_DESC. We can just parse nullptr for that 
 	// TODO : Search why ID3D11Device::CreateRenderTargetView() function doesn't require D3D11_RENDER_TARGET_VIEW_DESC
 
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> pDepthStencilState;
+
+	D3D11_DEPTH_STENCIL_DESC depthStencilDesc = {};
+	depthStencilDesc.DepthEnable = TRUE;
+	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.DepthFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS;
+	depthStencilDesc.StencilEnable = FALSE;
+
+	//Create Depth Stencil State
+	GFX_THROW_EXCEPT_FAILED(pDevice->CreateDepthStencilState(&depthStencilDesc, &pDepthStencilState));
+
+	//Set Depth Stencil State to the pipline
+	pContext->OMSetDepthStencilState(pDepthStencilState.Get(), 1u);
+
+
+	//Create the Depth Stencil Texture
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> pDepthStencilTex;
+
+	D3D11_TEXTURE2D_DESC depthStencilTexDesc = {};
+	depthStencilTexDesc.Width = 800;
+	depthStencilTexDesc.Height = 600;
+	depthStencilTexDesc.MipLevels = 1;
+	depthStencilTexDesc.ArraySize = 1;
+	depthStencilTexDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D32_FLOAT;
+	depthStencilTexDesc.SampleDesc.Count = 1;
+	depthStencilTexDesc.SampleDesc.Quality = 0;
+	depthStencilTexDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+	depthStencilTexDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
+
+	GFX_THROW_EXCEPT_FAILED(pDevice->CreateTexture2D(&depthStencilTexDesc, nullptr, &pDepthStencilTex));
+
+	//Create Depth Stencil View 
+	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc = {};
+	depthStencilViewDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D32_FLOAT;
+	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION::D3D11_DSV_DIMENSION_TEXTURE2D;
+	depthStencilViewDesc.Texture2D.MipSlice = 0;
+
+	GFX_THROW_EXCEPT_FAILED(pDevice->CreateDepthStencilView(pDepthStencilTex.Get(), &depthStencilViewDesc, &pDepthStencilView));
+
 }
 
 void Renderer::SetProjectionMatrix(const DirectX::XMMATRIX& projectionMatrix)
@@ -152,6 +191,12 @@ IDXGISwapChain* Renderer::GetSwapChain() const
 ID3D11RenderTargetView* Renderer::GetBackbufferTargetView() const
 {
 	return pTargetViewBackBuffer.Get();
+}
+
+//Get a pointer to ID3D11DepthStencilView interface of the DepthStencilView object to the backbuffer
+
+ID3D11DepthStencilView* Renderer::GetDepthStencilView() const {
+	return pDepthStencilView.Get();
 }
 
 void Renderer::Render() const

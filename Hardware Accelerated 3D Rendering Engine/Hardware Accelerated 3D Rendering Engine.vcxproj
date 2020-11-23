@@ -101,7 +101,9 @@
       <ObjectFileOutput>$(OutDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <PostBuildEvent>
-      <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F</Command>
+      <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F
+XCOPY "$(ProjectDir)Textures" "$(OutDir)Textures\" /Y /F
+XCOPY "$(ProjectDir)Models" "$(OutDir)Models\" /Y /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,7 +125,9 @@
       <ObjectFileOutput>$(OutDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <PostBuildEvent>
-      <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F</Command>
+      <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F
+XCOPY "$(ProjectDir)Textures" "$(OutDir)Textures\" /Y /F
+XCOPY "$(ProjectDir)Models" "$(OutDir)Models\" /Y /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,7 +145,9 @@
       <ObjectFileOutput>$(OutDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <PostBuildEvent>
-      <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F</Command>
+      <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F
+XCOPY "$(ProjectDir)Textures" "$(OutDir)Textures\" /Y /F
+XCOPY "$(ProjectDir)Models" "$(OutDir)Models\" /Y /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -163,7 +169,9 @@
       <ObjectFileOutput>$(OutDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <PostBuildEvent>
-      <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F</Command>
+      <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F
+XCOPY "$(ProjectDir)Textures" "$(OutDir)Textures\" /Y /F
+XCOPY "$(ProjectDir)Models" "$(OutDir)Models\" /Y /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -173,22 +181,29 @@
     <ClCompile Include="src\BindableSystem\InputLayout.cpp" />
     <ClCompile Include="src\BindableSystem\PixelShader.cpp" />
     <ClCompile Include="src\BindableSystem\PrimitiveTopology.cpp" />
+    <ClCompile Include="src\BindableSystem\Sampler.cpp" />
+    <ClCompile Include="src\BindableSystem\Texture2D.cpp" />
     <ClCompile Include="src\BindableSystem\TransformVSCBuf.cpp" />
     <ClCompile Include="src\BindableSystem\VertexBuffer.cpp" />
     <ClCompile Include="src\BindableSystem\VertexShader.cpp" />
     <ClCompile Include="src\D3DIncludes.cpp" />
     <ClCompile Include="src\DrawableSystem\Box.cpp" />
+    <ClCompile Include="src\DrawableSystem\BoxWithTexture.cpp" />
     <ClCompile Include="src\DrawableSystem\Drawable.cpp" />
+    <ClCompile Include="src\DrawableSystem\Skull.cpp" />
     <ClCompile Include="src\DrawableSystem\Triangle.cpp" />
     <ClCompile Include="src\DXGIInfoManager.cpp" />
     <ClCompile Include="src\Exceptions.cpp" />
     <ClCompile Include="src\GameWindow.cpp" />
+    <ClCompile Include="src\GdiPlusManager.cpp" />
     <ClCompile Include="src\GraphicsException.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Pixel.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\EngineBase.cpp" />
     <ClCompile Include="src\SimpleTimer.cpp" />
+    <ClCompile Include="src\TextureImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
@@ -200,6 +215,8 @@
     <ClInclude Include="src\BindableSystem\PixelShader.h" />
     <ClInclude Include="src\BindableSystem\PrimitiveTopology.h" />
     <ClInclude Include="src\BindableSystem\PSConstantBuffer.h" />
+    <ClInclude Include="src\BindableSystem\Sampler.h" />
+    <ClInclude Include="src\BindableSystem\Texture2D.h" />
     <ClInclude Include="src\BindableSystem\TransformVSCBuf.h" />
     <ClInclude Include="src\BindableSystem\VertexBuffer.h" />
     <ClInclude Include="src\BindableSystem\VertexShader.h" />
@@ -207,19 +224,24 @@
     <ClInclude Include="src\BindableTesting.h" />
     <ClInclude Include="src\D3DIncludes.h" />
     <ClInclude Include="src\DrawableSystem\Box.h" />
+    <ClInclude Include="src\DrawableSystem\BoxWithTexture.h" />
     <ClInclude Include="src\DrawableSystem\Drawable.h" />
     <ClInclude Include="src\DrawableSystem\Mesh.h" />
+    <ClInclude Include="src\DrawableSystem\Skull.h" />
     <ClInclude Include="src\DrawableSystem\Triangle.h" />
     <ClInclude Include="src\DrawTriangle.h" />
     <ClInclude Include="src\DXGIInfoManager.h" />
     <ClInclude Include="src\Exceptions.h" />
     <ClInclude Include="src\GameWindow.h" />
+    <ClInclude Include="src\GdiPlusManager.h" />
     <ClInclude Include="src\GraphicsException.h" />
     <ClInclude Include="src\GraphicsExceptionMacros.h" />
+    <ClInclude Include="src\Pixel.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\EngineBase.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\SimpleTimer.h" />
+    <ClInclude Include="src\TextureImage.h" />
     <ClInclude Include="src\WindowsInclude.h" />
   </ItemGroup>
   <ItemGroup>
@@ -235,12 +257,37 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="src\Shaders\PixelShaderBox.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="src\Shaders\PSBoxTex.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
     <FxCompile Include="src\Shaders\VertexShaderBox.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="src\Shaders\VSBoxTex.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\BoxTex.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

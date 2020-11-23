@@ -17,6 +17,7 @@ public:
 	~Drawable();
 
 	virtual void Draw();
+	virtual const DirectX::XMMATRIX GetTransform() const;
 
 protected:
 	void AddBindable(const Bindable* pBindable);
@@ -26,6 +27,8 @@ protected:
 	constexpr const Renderer* GetRenderer() const {
 		return m_ptrRenderer;
 	}
+
+
 
 private:
 	const Renderer* m_ptrRenderer = nullptr;

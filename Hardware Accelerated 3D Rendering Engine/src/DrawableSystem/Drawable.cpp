@@ -5,7 +5,8 @@ Drawable::Drawable(const Renderer* pRenderer) : m_ptrRenderer(pRenderer) {}
 Drawable::~Drawable() {
 	//Delete all the bindables
 	for (const Bindable* pBindable : m_ptrBindables) {
-		if (pBindable) delete pBindable;
+		if (pBindable) 
+			delete pBindable;
 	}
 }
 
@@ -26,4 +27,9 @@ void Drawable::AddBindable(const Bindable* pBindable) {
 void Drawable::AddIndexBufferBindable(const IndexBuffer* pIndexBuffer) {
 	m_nIndexCount = pIndexBuffer->GetElementCount();
 	AddBindable(pIndexBuffer);
+}
+
+const DirectX::XMMATRIX Drawable::GetTransform() const
+{
+	return DirectX::XMMatrixIdentity();
 }

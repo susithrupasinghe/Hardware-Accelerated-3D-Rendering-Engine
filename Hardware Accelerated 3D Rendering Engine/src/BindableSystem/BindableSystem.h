@@ -9,6 +9,8 @@
 #include "PixelShader.h"
 #include "PrimitiveTopology.h"
 #include "PSConstantBuffer.h"
+#include "Sampler.h"
+#include "Texture2D.h"
 #include "TransformVSCBuf.h"
 #include "VertexBuffer.h"
 #include "VertexShader.h"

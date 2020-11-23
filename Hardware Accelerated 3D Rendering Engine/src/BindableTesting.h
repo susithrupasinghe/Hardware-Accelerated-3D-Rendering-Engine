@@ -16,7 +16,7 @@ public:
 private:
 	bool OnStart() override {
 
-		GetRenderer()->SetProjectionMatrix(DirectX::XMMatrixPerspectiveFovLH(90.0f, (float)GetHeight() / (float)GetWidth(), 0.1f, 100.0f));
+		GetRenderer()->SetProjectionMatrix(DirectX::XMMatrixPerspectiveLH(1.0f, (float)GetHeight() / (float)GetWidth(), 0.5f, 100.0f));
 
 		D3D11_VIEWPORT viewports[] = { {0.0f, 0.0f, (FLOAT)GetWidth(), (FLOAT)GetHeight(), 0.0f, 1.0f} };
 

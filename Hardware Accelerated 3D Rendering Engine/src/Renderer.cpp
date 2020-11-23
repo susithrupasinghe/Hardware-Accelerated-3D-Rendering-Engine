@@ -163,6 +163,12 @@ Renderer::Renderer(HWND hWnd) {
 
 }
 
+void Renderer::ClearBackBuffer(const DirectX::XMFLOAT4& color) {
+	pContext->ClearRenderTargetView(pTargetViewBackBuffer.Get(), (FLOAT*)(&color));
+	pContext->ClearDepthStencilView(pDepthStencilView.Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+}
+
 void Renderer::SetProjectionMatrix(const DirectX::XMMATRIX& projectionMatrix)
 {
 	m_xmmatrixProjectionMatrix = projectionMatrix;

@@ -1,13 +1,21 @@
-////#include "Application.h"
-//#include "DrawTriangle.h"
+//////#include "Application.h"
+////#include "DrawTriangle.h"
+////
+////int main() {
+////	return DrawTriangle::GetSingleton().Run();
+////}
+//
+//#include "BindableTesting.h"
 //
 //int main() {
-//	return DrawTriangle::GetSingleton().Run();
+//	BindableTesting demo;
+//	demo.Run();
 //}
 
-#include "BindableTesting.h"
+#include "Application.h"
 
 int main() {
-	BindableTesting demo;
-	demo.Run();
+	Application app("Hardware Accelarated 3D Renderer", 800, 600);
+	app.Run();
+	return 0;
 }

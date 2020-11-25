@@ -7,22 +7,24 @@
 //DirectX Includes
 #include <DirectXMath.h>
 
-//Standard library
-
-struct Vertex {
-	DirectX::XMFLOAT3 Position;
-};
-
 
 class Mesh : public Drawable {
 public:
-	Mesh(const Renderer* pRenderer) : Drawable(pRenderer) {
-		
-	}
+	Mesh(const Renderer* pRenderer, const std::wstring& objfile, 
+		const std::wstring& texture, 
+		const DirectX::XMFLOAT3& position = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f),
+		const DirectX::XMFLOAT3& rotation = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f)
+		);
+
+	const void SetPosition(const DirectX::XMFLOAT3& Position);
+	const void SetRotation(const DirectX::XMFLOAT3& Rotation);
+	constexpr DirectX::XMFLOAT3& GetRotation() { return m_rotation; }
+	constexpr DirectX::XMFLOAT3& GetPosition() { return m_position; }
+	virtual const DirectX::XMMATRIX GetTransform() const override;
 
 private:
-	std::vector<Vertex> m_vecVertices;
-	std::vector<unsigned short> m_vecIndices;
+	DirectX::XMFLOAT3 m_position = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+	DirectX::XMFLOAT3 m_rotation = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
 };
 
 #endif // !MESH_H

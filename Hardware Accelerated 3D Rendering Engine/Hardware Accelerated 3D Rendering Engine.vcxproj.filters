@@ -102,6 +102,9 @@
     <ClCompile Include="src\DrawableSystem\Skull.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\DrawableSystem\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DXGIInfoManager.h">
@@ -215,6 +218,9 @@
     <ClInclude Include="src\DrawableSystem\Skull.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ThirdParty\WaveFrontReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="src\Shaders\BoxPixelShader.hlsl" />
@@ -223,6 +229,8 @@
     <FxCompile Include="src\Shaders\PixelShaderBox.hlsl" />
     <FxCompile Include="src\Shaders\VSBoxTex.hlsl" />
     <FxCompile Include="src\Shaders\PSBoxTex.hlsl" />
+    <FxCompile Include="src\Shaders\MeshVS.hlsl" />
+    <FxCompile Include="src\Shaders\MeshPS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\BoxTex.png">

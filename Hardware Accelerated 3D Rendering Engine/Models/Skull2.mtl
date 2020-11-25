@@ -1,0 +1,13 @@
+# Blender MTL File: 'Skull.blend'
+# Material Count: 1
+
+newmtl 12140_Skull_v3
+Ns 24.000002
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.117000 0.117000 0.117000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\Buddhima Zoysa\\Downloads\\Skull_v3_L2.123c1407fc1e-ea5c-4cb9-9072-d28b8aba4c36\\Skull_v3_L2.123c1407fc1e-ea5c-4cb9-9072-d28b8aba4c36\\Skull.jpg

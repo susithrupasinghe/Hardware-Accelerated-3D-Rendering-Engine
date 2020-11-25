@@ -6,10 +6,12 @@
 #include "DrawableSystem/Box.h"
 #include "DrawableSystem/BoxWithTexture.h"
 #include "DrawableSystem/Skull.h"
+#include "DrawableSystem/Mesh.h"
 
 //Standard Includes
 #include <vector>
 #include <cstdint>
+#include <unordered_map>
 
 class Application : public EngineBase {
 public:
@@ -20,11 +22,7 @@ private:
 	bool OnDestroy() override;
 
 private:
-	Box* pBox = nullptr;
-	Box* pBox2 = nullptr;
-	BoxWithTexture* pBoxTex = nullptr;
-	Skull* pSkull = nullptr;
-	
+	std::unordered_map<std::string, Drawable*> m_drawables;
 };
 
 #endif // !APPLICATION_H

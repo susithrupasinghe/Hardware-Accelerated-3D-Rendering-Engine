@@ -17,53 +17,43 @@ bool Application::OnStart() {
 	ID3D11RenderTargetView* renderTargets[] = { GetRenderer()->GetBackbufferTargetView() };
 	GetRenderer()->GetContext()->OMSetRenderTargets((UINT)(sizeof(renderTargets) / sizeof(renderTargets[0])), renderTargets, GetRenderer()->GetDepthStencilView());
 
-	
+	m_drawables.insert({ "Skull", new Mesh(
+		GetRenderer(),
+		std::wstring(L"Models/12140_Skull_v3_L2.obj"),
+		std::wstring(L"Models/Skull.jpg"),
+		XMFLOAT3(0.0f, 0.0f, 40.0f)
+	) });
 
-	//Create a box
-	pBox = new Box(GetRenderer());
-
-	pBox2 = new Box(GetRenderer());
-
-	pBoxTex = new BoxWithTexture(GetRenderer());
-
-	pSkull = new Skull(GetRenderer());
-	pSkull->GetPosition().z = 40.0f;
+	m_drawables.insert(
+		{ "Box", 
+		new Mesh(
+		GetRenderer(),
+		std::wstring(L"Models/Box.obj"),
+		std::wstring(L"Textures/BoxTex.png"),
+		XMFLOAT3(5.0f, 0.0f, 4.0f)
+	) });
 
 	return true;
 }
 
 bool Application::OnUpdate(float dt) {
-	
-
-	const float fMovingSpeed = 2.0f;
 	const float fRotatingSpeed = 1.0f;
 
-	//pBox->GetRotation().x += fRotatingSpeed * dt;
-	//pBox->GetRotation().y += fRotatingSpeed * dt;
+	Mesh* pBox = reinterpret_cast<Mesh*>(m_drawables["Box"]);
+	Mesh* pSkull = reinterpret_cast<Mesh*>(m_drawables["Skull"]);
 
-	//pBox2->GetRotation().x -= fRotatingSpeed * dt;
-	//pBox2->GetRotation().y -= fRotatingSpeed * dt;
+	pBox->GetRotation().x += fRotatingSpeed * dt;
+	pBox->GetRotation().z += fRotatingSpeed * dt;
 
-	//pBox->Draw();
-	//pBox2->Draw();
 
-	//pBoxTex->GetRotation().x -= fRotatingSpeed * dt;
-	//pBoxTex->GetRotation().y -= fRotatingSpeed * dt;
-
-	//pBoxTex->Draw();
-
-	//pSkull->GetRotation().x -= fRotatingSpeed * dt;
-	pSkull->GetRotation().y -= fRotatingSpeed * dt;
-
-	pSkull->Draw();
-
+	for (const std::pair<std::string, Drawable*>& drawablePair : m_drawables)
+		drawablePair.second->Draw();
 	return true;
 }
 
 bool Application::OnDestroy()
 {
-	if (pBox) delete pBox;
-	if (pBox2) delete pBox2;
-	if (pBoxTex) delete pBoxTex;
+	for (const std::pair<std::string, Drawable*>& drawablePair : m_drawables)
+		if (drawablePair.second) delete drawablePair.second;
 	return true;
 }

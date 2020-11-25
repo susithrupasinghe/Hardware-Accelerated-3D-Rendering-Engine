@@ -1,14 +1,24 @@
 #include "Skull.h"
 
+#include "../../ThirdParty/WaveFrontReader.h"
+
 #include <fstream>
 #include <iterator>
 #include <sstream>
 
 Skull::Skull(const Renderer* pRenderer) : Drawable(pRenderer)
 {
-	const auto VerticesAndIndices = LoadFromFile("Models/Skull.obj");
-	const auto& Vertices = VerticesAndIndices.first;
-	const auto& Indices = VerticesAndIndices.second;
+
+	WaveFrontReader<uint16_t> reader;
+	reader.Load(L"Models/Skull2.obj");
+	std::vector<Vertex> Vertices(reader.vertices.size());
+	
+	for (size_t i = 0; i < reader.vertices.size(); i++) {
+		Vertices[i].position = reader.vertices[i].position;
+		Vertices[i].uv = reader.vertices[i].textureCoordinate;
+	}
+
+	const std::vector<uint16_t>& Indices = reader.indices;
 
 	//Create a vertex buffer for the model
 	AddBindable(new VertexBuffer(GetRenderer(), (UINT)Vertices.size(), (UINT)sizeof(Vertices[0]), Vertices.data()));
@@ -17,14 +27,18 @@ Skull::Skull(const Renderer* pRenderer) : Drawable(pRenderer)
 	AddIndexBufferBindable(new IndexBuffer(GetRenderer(), (UINT)Indices.size(), (UINT)sizeof(Indices[0]), DXGI_FORMAT_R16_UINT, Indices.data()));
 
 	//Create a vertex shader
-	const VertexShader* pVertexShader = new VertexShader(GetRenderer(), std::wstring(L"Shaders/VertexShaderBox.cso"));
+	const VertexShader* pVertexShader = new VertexShader(GetRenderer(), std::wstring(L"Shaders/VSBoxTex.cso"));
 	AddBindable(pVertexShader);
 
 	//Create a pixel shader
-	AddBindable(new PixelShader(GetRenderer(), std::wstring(L"Shaders/BoxPixelShader.cso")));
+	AddBindable(new PixelShader(GetRenderer(), std::wstring(L"Shaders/PSBoxTex.cso")));
 
 	//Create a input layout
-	std::vector<D3D11_INPUT_ELEMENT_DESC> InputLayouts = { { "POSITION", 0u, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0u, 0u, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0u }, };
+	std::vector<D3D11_INPUT_ELEMENT_DESC> InputLayouts = { 
+		{ "POSITION", 0u, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0u, 0u, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0u },
+		{ "TEXCOORD", 0u, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0u, (UINT)sizeof(Vertex::position), D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0u },
+
+	};
 	AddBindable(new InputLayout(GetRenderer(), InputLayouts, *pVertexShader));
 
 	//Create a primitive topology
@@ -32,6 +46,11 @@ Skull::Skull(const Renderer* pRenderer) : Drawable(pRenderer)
 
 	//Create a TransformVSCbuf
 	AddBindable(new TransformVSCBuf(GetRenderer(), this));
+
+	//Create a Texture and a sampler state
+	AddBindable(new Texture2D(GetRenderer(), TextureImage(std::wstring(L"Models/Skull.jpg"))));
+
+	AddBindable(new Sampler(GetRenderer()));
 	
 }	
 

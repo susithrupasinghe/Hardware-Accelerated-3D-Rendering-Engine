@@ -9,6 +9,11 @@
 #include <string>
 
 class Skull : public Drawable {
+private:
+	struct Vertex {
+		DirectX::XMFLOAT3 position;
+		DirectX::XMFLOAT2 uv;
+	};
 public:
 	Skull(const Renderer* pRenderer);
 	const void SetPosition(const DirectX::XMFLOAT3& Position);

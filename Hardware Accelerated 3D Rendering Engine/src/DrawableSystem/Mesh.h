@@ -9,8 +9,14 @@
 
 
 class Mesh : public Drawable {
+private:
+	struct Vertex {
+		DirectX::XMFLOAT3 position;
+		DirectX::XMFLOAT3 normal;
+		DirectX::XMFLOAT2 uv;
+	};
 public:
-	Mesh(const Renderer* pRenderer, const std::wstring& objfile, 
+	Mesh(const Renderer* pRenderer, const std::string& objfile, 
 		const std::wstring& texture, 
 		const DirectX::XMFLOAT3& position = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f),
 		const DirectX::XMFLOAT3& rotation = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f)

@@ -19,17 +19,17 @@ bool Application::OnStart() {
 
 	m_drawables.insert({ "Skull", new Mesh(
 		GetRenderer(),
-		std::wstring(L"Models/12140_Skull_v3_L2.obj"),
+		std::string("Models/Skull.obj"),
 		std::wstring(L"Models/Skull.jpg"),
 		XMFLOAT3(0.0f, 0.0f, 40.0f)
 	) });
 
 	m_drawables.insert(
-		{ "Box", 
+		{ "Cube", 
 		new Mesh(
 		GetRenderer(),
-		std::wstring(L"Models/Box.obj"),
-		std::wstring(L"Textures/BoxTex.png"),
+		std::string("Models/Cube.obj"),
+		std::wstring(L"Models/Cube.png"),
 		XMFLOAT3(5.0f, 0.0f, 4.0f)
 	) });
 
@@ -39,8 +39,10 @@ bool Application::OnStart() {
 bool Application::OnUpdate(float dt) {
 	const float fRotatingSpeed = 1.0f;
 
-	Mesh* pBox = reinterpret_cast<Mesh*>(m_drawables["Box"]);
+	Mesh* pBox = reinterpret_cast<Mesh*>(m_drawables["Cube"]);
 	Mesh* pSkull = reinterpret_cast<Mesh*>(m_drawables["Skull"]);
+
+	pSkull->GetRotation().y += fRotatingSpeed * dt;
 
 	pBox->GetRotation().x += fRotatingSpeed * dt;
 	pBox->GetRotation().z += fRotatingSpeed * dt;

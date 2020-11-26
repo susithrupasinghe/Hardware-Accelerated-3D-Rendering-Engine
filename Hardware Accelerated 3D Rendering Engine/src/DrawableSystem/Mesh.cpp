@@ -1,14 +1,18 @@
 #include "Mesh.h"
 
 //Local Includes
-#include "../../ThirdParty/WaveFrontReader.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 //Standard Includes
 #include <cstdint>
 
+#pragma comment(lib, "assimp-vc142-mt.lib")
+
 Mesh::Mesh(
 	const Renderer* pRenderer, 
-	const std::wstring& objfile, 
+	const std::string& objfile, 
 	const std::wstring& texture, 
 	const DirectX::XMFLOAT3& position, 
 	const DirectX::XMFLOAT3& rotation
@@ -19,11 +23,33 @@ Mesh::Mesh(
 	m_rotation(rotation)
 {
 	//First load the mesh
-	WaveFrontReader<uint16_t> reader;
-	reader.Load(objfile.c_str());
+	
+	Assimp::Importer im;
+	const auto pScene = im.ReadFile(objfile, aiPostProcessSteps::aiProcess_Triangulate | aiPostProcessSteps::aiProcess_JoinIdenticalVertices | aiPostProcessSteps::aiProcess_FlipUVs);
 
-	const std::vector<WaveFrontReader<uint16_t>::Vertex>& Vertices = reader.vertices;
-	const std::vector<uint16_t>& Indices = reader.indices;
+	const auto pMesh = pScene->mMeshes[0];
+
+	//pMesh->
+
+	std::vector<Vertex> Vertices (pMesh->mNumVertices);
+
+	for (size_t i = 0; i < pMesh->mNumVertices; i++) {
+		const auto& vertex = pMesh->mVertices[i];
+		const auto& normal = pMesh->mNormals[i];
+		const auto& uv = pMesh->mTextureCoords[0][i];
+		Vertices[i].position = DirectX::XMFLOAT3(vertex.x, vertex.y, vertex.z);
+		if(pMesh->HasNormals()) Vertices[i].normal = DirectX::XMFLOAT3(normal.x, normal.y, normal.z);
+		if(pMesh->HasTextureCoords(0)) Vertices[i].uv = { uv.x,  uv.y };
+	}
+
+	std::vector<uint16_t> Indices ((uint64_t)(pMesh->mNumFaces) * 3);
+	for (size_t i = 0; i < pMesh->mNumFaces; i++) {
+		const auto& pFace = pMesh->mFaces[i];
+		if (pFace.mNumIndices != 3) throw EXCEPT_GENERAL_MSG(std::string("Loading failed faces are not triangulated!\n Loading mesh : ") + objfile);
+		Indices[i * 3] = pFace.mIndices[0];
+		Indices[i * 3 + 1] = pFace.mIndices[1];
+		Indices[i * 3 + 2] = pFace.mIndices[2];
+	}
 
 	//Create a vertex buffer
 	AddBindable(new VertexBuffer(GetRenderer(), (UINT)Vertices.size(), (UINT)sizeof(Vertices[0]), Vertices.data()));
@@ -41,8 +67,8 @@ Mesh::Mesh(
 	//Create an input layout
 	std::vector<D3D11_INPUT_ELEMENT_DESC> inputElements = {
 		{ "POSITION", 0u, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0u, 0u, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0u },
-		{ "NORMAL", 0u, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0u, (UINT)sizeof(WaveFrontReader<uint16_t>::Vertex::position), D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0u },
-		{ "TEXCOORD", 0u, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0u, (UINT)(sizeof(WaveFrontReader<uint16_t>::Vertex::position) + sizeof(WaveFrontReader<uint16_t>::Vertex::normal)), D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0u },
+		{ "NORMAL", 0u, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0u, (UINT)sizeof(Vertex::position), D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0u },
+		{ "TEXCOORD", 0u, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0u, (UINT)(sizeof(Vertex::position) + sizeof(Vertex::normal)), D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0u },
 	};
 
 	AddBindable(new InputLayout(GetRenderer(), inputElements, *pVertexShader));

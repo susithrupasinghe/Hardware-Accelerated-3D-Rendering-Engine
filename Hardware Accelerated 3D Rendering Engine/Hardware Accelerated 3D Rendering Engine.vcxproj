@@ -111,8 +111,10 @@
       <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F
 XCOPY "$(ProjectDir)Textures" "$(OutDir)Textures\" /Y /F
 XCOPY "$(ProjectDir)Models" "$(OutDir)Models\" /Y /F
-XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x86" "$(OutDir)" /Y /F
-XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x86" "$(ProjectDir)" /Y /F</Command>
+XCOPY "$(ProjectDir)ThirdParty\libs\$(Configuration)\x86" "$(OutDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\libs\$(Configuration)\x86" "$(ProjectDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\bins\$(Configuration)\x86" "$(OutDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\bins\$(Configuration)\x86" "$(ProjectDir)" /Y /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,8 +141,10 @@ XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x86" "$(ProjectDir)" /Y /F</Comm
       <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F
 XCOPY "$(ProjectDir)Textures" "$(OutDir)Textures\" /Y /F
 XCOPY "$(ProjectDir)Models" "$(OutDir)Models\" /Y /F
-XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x86" "$(OutDir)" /Y /F
-XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x86" "$(ProjectDir)" /Y /F</Command>
+XCOPY "$(ProjectDir)ThirdParty\libs\$(Configuration)\x86" "$(OutDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\libs\$(Configuration)\x86" "$(ProjectDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\bins\$(Configuration)\x86" "$(OutDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\bins\$(Configuration)\x86" "$(ProjectDir)" /Y /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -163,8 +167,10 @@ XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x86" "$(ProjectDir)" /Y /F</Comm
       <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F
 XCOPY "$(ProjectDir)Textures" "$(OutDir)Textures\" /Y /F
 XCOPY "$(ProjectDir)Models" "$(OutDir)Models\" /Y /F
-XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x64" "$(OutDir)" /Y /F
-XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x64" "$(ProjectDir)" /Y /F</Command>
+XCOPY "$(ProjectDir)ThirdParty\libs\$(Configuration)\x64" "$(OutDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\libs\$(Configuration)\x64" "$(ProjectDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\bins\$(Configuration)\x64" "$(OutDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\bins\$(Configuration)\x64" "$(ProjectDir)" /Y /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -191,8 +197,10 @@ XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x64" "$(ProjectDir)" /Y /F</Comm
       <Command>XCOPY "$(OutDir)Shaders" "$(ProjectDir)Shaders\" /Y /F
 XCOPY "$(ProjectDir)Textures" "$(OutDir)Textures\" /Y /F
 XCOPY "$(ProjectDir)Models" "$(OutDir)Models\" /Y /F
-XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x64" "$(OutDir)" /Y /F
-XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x64" "$(ProjectDir)" /Y /F</Command>
+XCOPY "$(ProjectDir)ThirdParty\libs\$(Configuration)\x64" "$(OutDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\libs\$(Configuration)\x64" "$(ProjectDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\bins\$(Configuration)\x64" "$(OutDir)" /Y /F
+XCOPY "$(ProjectDir)ThirdParty\bins\$(Configuration)\x64" "$(ProjectDir)" /Y /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -265,6 +273,82 @@ XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x64" "$(ProjectDir)" /Y /F</Comm
     <ClInclude Include="src\SimpleTimer.h" />
     <ClInclude Include="src\TextureImage.h" />
     <ClInclude Include="src\WindowsInclude.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\aabb.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\ai_assert.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\anim.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\BaseImporter.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Bitmap.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\BlobIOSystem.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\ByteSwapper.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\camera.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\cexport.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\cfileio.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\cimport.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\color4.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\config.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\CreateAnimMesh.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\DefaultIOStream.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="ThirdParty\includes\assimp\Defines.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\defs.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Exceptional.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Exporter.hpp" />
+    <ClInclude Include="ThirdParty\includes\assimp\fast_atof.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\GenericProperty.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Hash.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Importer.hpp" />
+    <ClInclude Include="ThirdParty\includes\assimp\importerdesc.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\IOStream.hpp" />
+    <ClInclude Include="ThirdParty\includes\assimp\IOStreamBuffer.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\IOSystem.hpp" />
+    <ClInclude Include="ThirdParty\includes\assimp\irrXMLWrapper.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\light.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\LineSplitter.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\LogAux.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Logger.hpp" />
+    <ClInclude Include="ThirdParty\includes\assimp\LogStream.hpp" />
+    <ClInclude Include="ThirdParty\includes\assimp\Macros.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\material.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\MathFunctions.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\matrix3x3.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\matrix4x4.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\mesh.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\metadata.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\NullLogger.hpp" />
+    <ClInclude Include="ThirdParty\includes\assimp\ParsingUtils.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\pbrmaterial.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\postprocess.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Profiler.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="ThirdParty\includes\assimp\qnan.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\quaternion.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\RemoveComments.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\scene.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\SceneCombiner.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\SGSpatialSort.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\SmoothingGroups.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\SpatialSort.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\StandardShapes.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\StreamReader.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\StreamWriter.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\StringComparison.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\StringUtils.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Subdivision.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\texture.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\TinyFormatter.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\types.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\vector2.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\vector3.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\version.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\Vertex.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\XMLTools.h" />
+    <ClInclude Include="ThirdParty\includes\assimp\ZipArchiveIOSystem.h" />
     <ClInclude Include="ThirdParty\WaveFrontReader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -322,7 +406,53 @@ XCOPY "$(ProjectDir)ThirdParty\$(Configuration)\x64" "$(ProjectDir)" /Y /F</Comm
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Models\Skull.jpg" />
+    <Image Include="Models\Skull.png" />
     <Image Include="Textures\BoxTex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Skull.blend" />
+    <None Include="Models\Skull.blend1" />
+    <None Include="Models\Skull.mtl" />
+    <None Include="Models\Skull2.mtl" />
+    <None Include="ThirdParty\bins\Debug\x64\assimp-vc142-mtd.dll" />
+    <None Include="ThirdParty\bins\Debug\x64\bz2d.dll" />
+    <None Include="ThirdParty\bins\Debug\x64\Irrlicht.dll" />
+    <None Include="ThirdParty\bins\Debug\x64\jpeg62.dll" />
+    <None Include="ThirdParty\bins\Debug\x64\libpng16d.dll" />
+    <None Include="ThirdParty\bins\Debug\x64\zlibd1.dll" />
+    <None Include="ThirdParty\bins\Debug\x86\assimp-vc142-mtd.dll" />
+    <None Include="ThirdParty\bins\Debug\x86\bz2d.dll" />
+    <None Include="ThirdParty\bins\Debug\x86\Irrlicht.dll" />
+    <None Include="ThirdParty\bins\Debug\x86\jpeg62.dll" />
+    <None Include="ThirdParty\bins\Debug\x86\libpng16d.dll" />
+    <None Include="ThirdParty\bins\Debug\x86\zlibd1.dll" />
+    <None Include="ThirdParty\bins\Release\x64\assimp-vc142-mt.dll" />
+    <None Include="ThirdParty\bins\Release\x64\bz2.dll" />
+    <None Include="ThirdParty\bins\Release\x64\Irrlicht.dll" />
+    <None Include="ThirdParty\bins\Release\x64\jpeg62.dll" />
+    <None Include="ThirdParty\bins\Release\x64\libpng16.dll" />
+    <None Include="ThirdParty\bins\Release\x64\zlib1.dll" />
+    <None Include="ThirdParty\bins\Release\x86\assimp-vc142-mt.dll" />
+    <None Include="ThirdParty\bins\Release\x86\bz2.dll" />
+    <None Include="ThirdParty\bins\Release\x86\Irrlicht.dll" />
+    <None Include="ThirdParty\bins\Release\x86\jpeg62.dll" />
+    <None Include="ThirdParty\bins\Release\x86\libpng16.dll" />
+    <None Include="ThirdParty\bins\Release\x86\zlib1.dll" />
+    <None Include="ThirdParty\includes\assimp\color4.inl" />
+    <None Include="ThirdParty\includes\assimp\material.inl" />
+    <None Include="ThirdParty\includes\assimp\matrix3x3.inl" />
+    <None Include="ThirdParty\includes\assimp\matrix4x4.inl" />
+    <None Include="ThirdParty\includes\assimp\quaternion.inl" />
+    <None Include="ThirdParty\includes\assimp\SmoothingGroups.inl" />
+    <None Include="ThirdParty\includes\assimp\vector2.inl" />
+    <None Include="ThirdParty\includes\assimp\vector3.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="ThirdParty\libs\Debug\x64\assimp-vc142-mtd.lib" />
+    <Library Include="ThirdParty\libs\Debug\x86\assimp-vc142-mtd.lib" />
+    <Library Include="ThirdParty\libs\Release\x64\assimp-vc142-mt.lib" />
+    <Library Include="ThirdParty\libs\Release\x86\assimp-vc142-mt.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
